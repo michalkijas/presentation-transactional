@@ -26,3 +26,8 @@
 * test architektury uwzględniający umieszczanie @transactional ?? private/public/protected/package + method/service
 * zdarzenia DDD ???
 * zapis encji + kolekcji (lead+interakcje)
+
+
+Open session in view - controller vs service
+
+[ArchUnit](https://www.archunit.org/userguide/html/000_Index.html)
