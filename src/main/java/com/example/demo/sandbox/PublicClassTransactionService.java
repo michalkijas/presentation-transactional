@@ -3,8 +3,9 @@ package com.example.demo.sandbox;
 import lombok.RequiredArgsConstructor;
 import javax.transaction.Transactional;
 
+@Transactional
 @RequiredArgsConstructor
-class LeadService {
+public class PublicClassTransactionService {
 
     private final LeadRepository leadRepository;
 
@@ -15,32 +16,17 @@ class LeadService {
         return leadRepository.save(lead);
     }
 
-    @Transactional
-    public Lead createLeadUsingAnnotation(String comment) {
-        Lead lead = new Lead();
-        lead.setComment(comment);
-        return lead;
-    }
-
-    @Transactional
     public void updateByPublicMethod(Long leadId, String comment) {
         Lead lead = leadRepository.getByIdOrThrow(leadId);
         lead.setComment(comment);
     }
 
-    @Transactional
     void updateByPackageMethod(Long leadId, String comment) {
         Lead lead = leadRepository.getByIdOrThrow(leadId);
         lead.setComment(comment);
     }
 
-    @Transactional
     protected void updateByProtectedMethod(Long leadId, String comment) {
-        Lead lead = leadRepository.getByIdOrThrow(leadId);
-        lead.setComment(comment);
-    }
-
-    void updateWithoutAnnotation(Long leadId, String comment) {
         Lead lead = leadRepository.getByIdOrThrow(leadId);
         lead.setComment(comment);
     }

@@ -7,8 +7,18 @@ import org.springframework.context.annotation.Configuration;
 class LeadConfiguration {
 
     @Bean
-    LeadService leadService(LeadRepository leadRepository) {
-        return new LeadService(leadRepository);
+    MethodTransactionService leadService(LeadRepository leadRepository) {
+        return new MethodTransactionService(leadRepository);
+    }
+
+    @Bean
+    PackageClassTransactionService packageClassTransactionService(LeadRepository leadRepository) {
+        return new PackageClassTransactionService(leadRepository);
+    }
+
+    @Bean
+    PublicClassTransactionService publicClassTransactionService(LeadRepository leadRepository) {
+        return new PublicClassTransactionService(leadRepository);
     }
 
 }
