@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-class Lead {
+public class Lead {
 
     @GeneratedValue
     @Id

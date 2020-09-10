@@ -10,6 +10,7 @@
 * read-only and read-write operation
   * https://vladmihalcea.com/read-write-read-only-transaction-routing-spring/
   * https://fable.sh/blog/splitting-read-and-write-operations-in-spring-boot/
+  * https://blog.pchudzik.com/201911/read-from-replica/
 * open session in view
   * https://vladmihalcea.com/the-open-session-in-view-anti-pattern/
   * [The OSIV Anti-Pattern](https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot/48222934#48222934)

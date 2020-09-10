@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    show-sql: true
+    properties.hibernate.format_sql: true
+#    hibernate.ddl-auto: none
+#    generate-ddl: false
+
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+app:
+  datasource:
+    master:
+      jdbcUrl: "jdbc:h2:mem:master_db;MV_STORE=TRUE;MODE=PostgreSQL;DATABASE_TO_UPPER=TRUE"
+      username: "sa"
+      password: "sa"
+      driverClassName: "org.h2.Driver"
+    slave:
+      jdbcUrl: "jdbc:h2:mem:slave_db;MV_STORE=TRUE;MODE=PostgreSQL;DATABASE_TO_UPPER=TRUE"
+      username: "sa"
+      password: "sa"
+      driverClassName: "org.h2.Driver"
