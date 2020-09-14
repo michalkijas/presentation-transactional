@@ -2,7 +2,7 @@ package com.example.demo.sandbox;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LeadRepository extends JpaRepository<Lead, Long> {
+interface LeadRepository extends JpaRepository<Lead, Long> {
 
     default Lead getByIdOrThrow(Long id) {
         return findById(id)

@@ -1,7 +1,7 @@
 package com.example.demo.sandbox;
 
 import lombok.RequiredArgsConstructor;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @RequiredArgsConstructor

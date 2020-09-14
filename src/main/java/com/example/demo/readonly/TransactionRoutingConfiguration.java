@@ -1,6 +1,6 @@
 package com.example.demo.readonly;
 
-import com.example.demo.sandbox.LeadRepository;
+import com.example.demo.SandboxTransactionalApplication;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,13 +19,8 @@ import javax.sql.DataSource;
  * https://blog.pchudzik.com/201911/read-from-replica/
  * https://vladmihalcea.com/read-write-read-only-transaction-routing-spring/
  */
-@Configuration
+//@Configuration
 public class TransactionRoutingConfiguration {
-
-    @Bean
-    ReadOnlyService readOnlyService(LeadRepository leadRepository) {
-        return new ReadOnlyService(leadRepository);
-    }
 
     @Bean
     @ConfigurationProperties(prefix = "app.datasource.master")
@@ -51,7 +46,8 @@ public class TransactionRoutingConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(routingDataSource())
-                .packages("com.example.demo")
+//                .packages("com.example.demo")
+                .packages(SandboxTransactionalApplication.class)
                 .build();
     }
 

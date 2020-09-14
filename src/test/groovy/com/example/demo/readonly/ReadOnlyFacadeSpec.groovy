@@ -1,5 +1,6 @@
 package com.example.demo.readonly
 
+import com.example.demo.sandbox.ReadOnlyFacade
 import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -8,10 +9,10 @@ import spock.lang.Subject
 
 //@Import(TransactionRoutingConfiguration)
 @SpringBootTest
-class ReadOnlyServiceSpec extends Specification {
+class ReadOnlyFacadeSpec extends Specification {
 
     @Autowired
-    @Subject ReadOnlyService sut = new ReadOnlyService()
+    @Subject ReadOnlyFacade sut = new ReadOnlyFacade()
 
 
     def "should run transation in read-write mode on primary node"() {

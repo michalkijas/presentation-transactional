@@ -1,26 +1,25 @@
-package com.example.demo.readonly;
+package com.example.demo.sandbox;
 
 
-import com.example.demo.sandbox.Lead;
-import com.example.demo.sandbox.LeadRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class ReadOnlyService {
+public class ReadOnlyFacade {
 
     private final LeadRepository repository;
 
 
-    @Transactional
+    //    @Transactional
     public Lead create(String comment) {
         Lead lead = new Lead();
         lead.setComment(comment);
         return repository.save(lead);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public List<Lead> findAll() {
         return repository.findAll();
     }

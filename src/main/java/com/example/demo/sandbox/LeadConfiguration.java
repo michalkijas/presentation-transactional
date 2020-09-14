@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 class LeadConfiguration {
 
     @Bean
+    ReadOnlyFacade readOnlyFacade(LeadRepository leadRepository) {
+        return new ReadOnlyFacade(leadRepository);
+    }
+
+    @Bean
     MethodTransactionService leadService(LeadRepository leadRepository) {
         return new MethodTransactionService(leadRepository);
     }
