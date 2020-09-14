@@ -9,6 +9,8 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
+
 @Getter
 @Setter
 @Entity
@@ -18,7 +20,7 @@ class Lead {
     @Id
     private Long id;
 
-    @OneToMany(mappedBy = "lead")
+    @OneToMany(mappedBy = "lead", fetch = EAGER)
     private List<LeadInteraction> interactions = new ArrayList<>();
 
     private String comment;

@@ -22,13 +22,17 @@ import spock.lang.Subject
  * @DataJpaTest
  */
 @SpringBootTest
-class PublicClassTransactionServiceSpec extends Specification {
+class VisibilityClassPublicTransactionServiceSpec extends Specification {
 
     @Autowired LeadRepository repository
 
     @Autowired
-    @Subject PublicClassTransactionService sut
+    @Subject VisibilityClassPublicTransactionService sut
 
+
+    def setup() {
+        repository.deleteAll()
+    }
 
     def "should commit changes when using annotation on public class level and method with public scope"() {
         given:
@@ -37,10 +41,8 @@ class PublicClassTransactionServiceSpec extends Specification {
             sut.updateByPublicMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "NEW_VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "NEW_VALID_COMMENT"
     }
 
     def "should drop changes when using annotation on public class level and method with package scope"() {
@@ -50,10 +52,8 @@ class PublicClassTransactionServiceSpec extends Specification {
             sut.updateByPackageMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
     def "should drop changes when using annotation on public class level and method with protected scope"() {
@@ -63,10 +63,8 @@ class PublicClassTransactionServiceSpec extends Specification {
             sut.updateByProtectedMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
 }

@@ -5,7 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 import spock.lang.Subject
 
-
 /**
  * Using @SpringBootTest instead of @DataJpaTest to skip transaction
  *
@@ -14,13 +13,17 @@ import spock.lang.Subject
  * @DataJpaTest
  */
 @SpringBootTest
-class PackageClassTransactionServiceSpec extends Specification {
+class VisibilityClassPackageTransactionServiceSpec extends Specification {
 
     @Autowired LeadRepository repository
 
     @Autowired
-    @Subject PackageClassTransactionService sut
+    @Subject VisibilityClassPackageTransactionService sut
 
+
+    def setup() {
+        repository.deleteAll()
+    }
 
     def "should commit changes when using annotation on package-private class level and method with public scope"() {
         given:
@@ -29,10 +32,8 @@ class PackageClassTransactionServiceSpec extends Specification {
             sut.updateByPublicMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "NEW_VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "NEW_VALID_COMMENT"
     }
 
     def "should drop changes when using annotation on package-private class level and method with package scope"() {
@@ -42,10 +43,8 @@ class PackageClassTransactionServiceSpec extends Specification {
             sut.updateByPackageMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
     def "should drop changes when using annotation on package-private class level and method with protected scope"() {
@@ -55,10 +54,8 @@ class PackageClassTransactionServiceSpec extends Specification {
             sut.updateByProtectedMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
 }

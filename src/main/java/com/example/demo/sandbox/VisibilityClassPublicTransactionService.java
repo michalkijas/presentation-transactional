@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @RequiredArgsConstructor
-class PackageClassTransactionService {
+public class VisibilityClassPublicTransactionService {
 
     private final LeadRepository leadRepository;
 

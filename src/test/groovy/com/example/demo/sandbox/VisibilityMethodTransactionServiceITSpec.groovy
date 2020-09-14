@@ -13,23 +13,25 @@ import spock.lang.Subject
  * @DataJpaTest
  */
 @SpringBootTest
-class MethodTransactionServiceITSpec extends Specification {
+class VisibilityMethodTransactionServiceITSpec extends Specification {
 
     @Autowired LeadRepository repository
 
     @Autowired
-    @Subject MethodTransactionService sut
+    @Subject VisibilityMethodTransactionService sut
 
+
+    def setup() {
+        repository.deleteAll()
+    }
 
     def "should use Repository.save() method to persis and propagate entity Id"() {
         when:
             Long leadId = sut.createLeadUsingSaveMethod("VALID_COMMENT").getId()
             Lead lead = repository.findById(leadId).get()
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
     def "should commit changes when annotation @Transactional is used on public scope method"() {
@@ -39,10 +41,8 @@ class MethodTransactionServiceITSpec extends Specification {
             sut.updateByPublicMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "NEW_VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "NEW_VALID_COMMENT"
     }
 
     def "should drop changes when annotation @Transactional is used on  package-private scope method"() {
@@ -52,10 +52,8 @@ class MethodTransactionServiceITSpec extends Specification {
             sut.updateByPackageMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
     def "should drop changes when annotation @Transactional is used on protected scope method"() {
@@ -65,10 +63,8 @@ class MethodTransactionServiceITSpec extends Specification {
             sut.updateByProtectedMethod(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
     def "should drop changes when no annotation @Transactional is used on public scope method"() {
@@ -78,10 +74,8 @@ class MethodTransactionServiceITSpec extends Specification {
             sut.updateWithoutAnnotation(leadId, "NEW_VALID_COMMENT")
             Lead lead = repository.getByIdOrThrow(leadId)
         then:
-            with(lead) {
-                id == leadId
-                comment == "VALID_COMMENT"
-            }
+            lead.getId() == leadId
+            lead.getComment() == "VALID_COMMENT"
     }
 
 }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
-class MethodTransactionService {
+class VisibilityMethodTransactionService {
 
     private final LeadRepository leadRepository;
 

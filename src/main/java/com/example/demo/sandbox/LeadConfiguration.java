@@ -7,23 +7,33 @@ import org.springframework.context.annotation.Configuration;
 class LeadConfiguration {
 
     @Bean
-    ReadOnlyFacade readOnlyFacade(LeadRepository leadRepository) {
-        return new ReadOnlyFacade(leadRepository);
+    LeadInteractionService leadInteractionService(LeadInteractionRepository leadInteractionRepository) {
+        return new LeadInteractionService(leadInteractionRepository);
     }
 
     @Bean
-    MethodTransactionService leadService(LeadRepository leadRepository) {
-        return new MethodTransactionService(leadRepository);
+    ExceptionTransactionService exceptionTransactionService(LeadRepository leadRepository) {
+        return new ExceptionTransactionService(leadRepository);
     }
 
     @Bean
-    PackageClassTransactionService packageClassTransactionService(LeadRepository leadRepository) {
-        return new PackageClassTransactionService(leadRepository);
+    TransactionPropagationService transactionPropagationService(LeadRepository leadRepository, LeadInteractionService leadInteractionService) {
+        return new TransactionPropagationService(leadRepository, leadInteractionService);
     }
 
     @Bean
-    PublicClassTransactionService publicClassTransactionService(LeadRepository leadRepository) {
-        return new PublicClassTransactionService(leadRepository);
+    VisibilityClassPackageTransactionService visibilityClassPackageTransactionService(LeadRepository leadRepository) {
+        return new VisibilityClassPackageTransactionService(leadRepository);
+    }
+
+    @Bean
+    VisibilityClassPublicTransactionService visibilityClassPublicTransactionService(LeadRepository leadRepository) {
+        return new VisibilityClassPublicTransactionService(leadRepository);
+    }
+
+    @Bean
+    VisibilityMethodTransactionService visibilityMethodTransactionService(LeadRepository leadRepository) {
+        return new VisibilityMethodTransactionService(leadRepository);
     }
 
 }

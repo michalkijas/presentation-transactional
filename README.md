@@ -8,6 +8,7 @@
 #### Pitfals  
   * [5 common Spring @Transactional pitfalls](https://codete.com/blog/5-common-spring-transactional-pitfalls/)
     * [Checked and Unchecked Exceptions](https://www.codejava.net/java-core/exception/java-checked-and-unchecked-exceptions)
+  * [Spring Transactional propagation modes](https://codete.com/blog/spring-transaction-propagation-modes/)
   * https://www.ibm.com/developerworks/java/library/j-ts1/index.html
   * https://www.javacodegeeks.com/2011/12/spring-pitfalls-transactional-tests.html
 
