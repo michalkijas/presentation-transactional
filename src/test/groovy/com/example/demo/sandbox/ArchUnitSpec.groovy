@@ -24,7 +24,7 @@ class ArchUnitSpec extends Specification {
             methods()
                     .that().areAnnotatedWith(Transactional.class)
                     .should().bePublic()
-                    .check(sut);
+                    .check(sut)
     }
 
     def "should annotation @Transactional exist only on public and package-private scope classes"() {
@@ -32,7 +32,7 @@ class ArchUnitSpec extends Specification {
             classes()
                     .that().areAnnotatedWith(Transactional.class)
                     .should().bePublic().orShould().bePackagePrivate()
-                    .check(sut);
+                    .check(sut)
     }
 
 }

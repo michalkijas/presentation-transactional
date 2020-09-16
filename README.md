@@ -39,3 +39,25 @@
 #### Derby DB Replica
 http://db.apache.org/derby/docs/10.4/adminguide/cadminreplicstartrun.html
 
+---
+## Podsumowanie:
+ - wstęp do tego czym jest transakcja - nie koniecznie DB
+ - Czy można ręczne zarządzać trasakcjami tak jak w EJB
+ - Dziedziczenie i ukrywanie użycia annotacji
+ - OSIV vs radOnly - komibtowanie zmian po zakonczeniu operacji
+ - Rozwinąć opis Propagation.NESTED
+ - Synchronizacja z transakcjami - createOrUpdateNotification - ja zapewnić że posiadamy poprawnie zapisany obiekt
+    - REQUIRE_NEW
+    - entityManager/transactionManager .synchronize ???
+
+
+start
+  code
+  code
+  < exception > 
+  code 
+commit / rolback
+
+
+
+https://docstore.mik.ua/orelly/java-ent/ebeans/ch08_02.htm
