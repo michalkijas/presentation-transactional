@@ -1,6 +1,8 @@
 package com.example.demo.sandbox;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +13,11 @@ import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
 
+@Entity
 @Getter
 @Setter
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 class Lead {
 
     @GeneratedValue
