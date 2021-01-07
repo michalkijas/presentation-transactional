@@ -53,33 +53,9 @@ dependencies {
         exclude group: "org.codehaus.groovy", module: "groovy-testng"
     }
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-
     testImplementation 'com.tngtech.archunit:archunit:0.14.1'
-//    testImplementation "org.springframework.security:spring-security-test"
 }
 
 test {
     useJUnitPlatform()
 }
-
-// Disabling ArchUnit in `build` phase
-//allprojects {
-//    apply plugin: 'java'
-//    apply plugin: 'com.societegenerale.commons.plugin.gradle.ArchUnitGradlePlugin'
-//    archUnit {
-//        excludedPaths = ["some/package"]
-//        preConfiguredRules = [
-//                "com.societegenerale.commons.plugin.rules.NoInjectedFieldTest",
-//                "com.societegenerale.commons.plugin.rules.NoAutowiredFieldTest",
-//                "com.societegenerale.commons.plugin.rules.NoTestIgnoreWithoutCommentRuleTest",
-//                "com.societegenerale.commons.plugin.rules.NoPrefixForInterfacesRuleTest",
-//                "com.societegenerale.commons.plugin.rules.NoPowerMockRuleTest",
-//                "com.societegenerale.commons.plugin.rules.NoJodaTimeRuleTest",
-//                "com.societegenerale.commons.plugin.rules.NoJunitAssertRuleTest",
-//                "com.societegenerale.commons.plugin.rules.HexagonalArchitectureTest",
-//                "com.societegenerale.commons.plugin.rules.DontReturnNullCollectionTest",
-//                "com.societegenerale.commons.plugin.rules.StringFieldsThatAreActuallyDatesRuleTest"
-//        ]
-//        configurableRules = [configurableRule("com.tngtech.archunit.library.GeneralCodingRules", applyOn("com.example.demo", "main"))]
-//    }
-//}
